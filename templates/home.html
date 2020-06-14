@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block main %}
+    {% for post in posts%}
+            <h3><a href="{{ url_for('blog_post', post_id=post._id) }}" class="post-title">{{ post.title }}</a></h3>
+            <p class="text-monospace">By <a href="{{ url_for('about') }}">{{ post.username }}</a> , under <a href="https://flask.palletsprojects.com/en/1.1.x/">Flask</a>, {{ post.date }}</p>
+            {% if session.username == ("ADMIN_USR" | get_admin()) %}
+                <a class="btn btn-danger" href="{{ url_for('delete_post', post_id=post._id) }}">Delete</a>
+            {% endif %}
+        <hr>
+    {% endfor %}
+{% endblock %}
+

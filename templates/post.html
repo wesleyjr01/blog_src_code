@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Posts
+{% endblock %}
+
+{% block main %}
+    <div class="posttitle">
+        <h1>{{ post.title }}</h1>
+    </div>
+    <hr>
+    <div class="maintext">
+        {{ post.md_text | safe }}
+    </div>
+{% endblock %}

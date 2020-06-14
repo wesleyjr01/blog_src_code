@@ -1,0 +1,19 @@
+
+{% extends "layout.html" %}
+
+{% block title %}
+    Write Posts
+{% endblock %}
+
+{% block main %}
+    <h4>Write your post text below:</h4>
+    <form action="/write" method="POST">
+        <div class="form-group">
+            <input autocomplete="off" autofocus class="form-control" name="title" placeholder="Title of the post" type="text">
+        </div>
+        <div class="form-group">
+            <textarea name="content" placeholder="Once upon a time..." rows=20></textarea>
+        </div>
+        <button class="btn btn-primary" type="submit">Post</button>
+    </form>
+{% endblock %}
