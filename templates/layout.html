@@ -2,14 +2,14 @@
 
 <html lang="en">
     <head>
+        <meta name="google-site-verification" content="nONcKPhy-NjNv9uLHO4G6irvHuMCyDM1Lc5oYH-qaiU" />
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-        <link rel="stylesheet" href="static/styles.css">
-        <link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
         <title>{% block title %}{% endblock %}</title>
     </head>
 
     <body  style="background-image: url({{ url_for('static', filename='bgimage02.jpg') }})">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark border">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <a class="navbar-brand" id="navbaricon" href="{{ url_for('index') }}">Welcome {{ session.username }}! </a>
             <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarSupportedContent" data-toggle="collapse" type="button">
                 <span class="navbar-toggler-icon"></span>

@@ -62,3 +62,17 @@ form textarea {
     margin-right: 5px;
     font-size: 15px;
 }
+
+.translate-button{
+    color: black;
+}
+
+.center-image{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+    padding:2px;
+    width: 25%;
+    border: 2px solid black;
+}

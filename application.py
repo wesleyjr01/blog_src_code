@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, session, flash, redirect
+from flask import Flask, render_template, request, session, flash, redirect, url_for
 import os
 from dotenv import load_dotenv
 
@@ -6,6 +6,7 @@ from helper import apology, login_required, get_admin
 from werkzeug.security import generate_password_hash
 from models.user import User
 from models.post import Post
+
 
 load_dotenv()
 
@@ -33,10 +34,10 @@ def about():
     return render_template("about.html")
 
 
-@app.route("/post/<string:post_id>")
-def blog_post(post_id):
+@app.route("/post/<string:post_id>/<string:lang>")
+def blog_post(post_id, lang):
     post = Post.get_by_id(_id=post_id)
-    return render_template("post.html", post=post)
+    return render_template("post.html", post=post, lang=lang)
 
 
 @app.route("/delete/<string:post_id>")
@@ -47,7 +48,7 @@ def delete_post(post_id):
         Post.delete_post(_id=post_id)
     else:
         return apology("Sorry, only users can delete posts.")
-    return redirect("/")
+    return redirect(url_for('index'))
 
 
 @app.route("/write", methods=["GET", "POST"])
@@ -55,15 +56,15 @@ def delete_post(post_id):
 def write():
     if request.method == "POST":
         title = request.form.get("title")
-        raw_text = request.form.get("content")
+        en_raw_text = request.form.get("content")
         user = User.get_user(session["username"])
 
-        new_post = Post(title, raw_text, user["username"], user["_id"])
+        new_post = Post(title, en_raw_text, user["username"], user["_id"])
         check_result, message = new_post.valid_post()
         if check_result:
             new_post.insert_to_db()
             flash(message)
-            return redirect("/")
+            return redirect(url_for('index'))
         else:
             return apology(message)
 
@@ -86,7 +87,7 @@ def register():
             user.insert_to_db()
             session["username"] = username
             flash(message)
-            return redirect("/")
+            return redirect(url_for('index'))
         else:
             return apology(message)
     else:
@@ -109,7 +110,7 @@ def login():
         if check_result:
             session["username"] = username
             flash(message)
-            return redirect("/")
+            return redirect(url_for('index'))
         else:
             return apology(message)
 
@@ -121,7 +122,7 @@ def login():
 def logout():
     # Forget any users
     session.clear()
-    return redirect("/")
+    return redirect(url_for('index'))
 
 
 if __name__ == "__main__":

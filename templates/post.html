@@ -5,11 +5,27 @@
 {% endblock %}
 
 {% block main %}
-    <div class="posttitle">
-        <h1>{{ post.title }}</h1>
-    </div>
-    <hr>
+<span>
+    <button class="btn btn-secondary" type="submit"><a class="translate-button"
+        href="{{ url_for('blog_post', post_id=post._id, lang='pt') }}">PT-BR</a></button>
+    <button class="btn btn-secondary" type="submit"><a class="translate-button"
+        href="{{ url_for('blog_post', post_id=post._id, lang='en') }}">EN-US</a></button>
+</span>
+ 
+
     <div class="maintext">
-        {{ post.md_text | safe }}
+        {% if lang == "en" %}
+            <div class="posttitle">
+                <h1>{{ post.en_title }}</h1>
+            </div>
+            <hr>
+            {{ post.en_md_text | safe }}
+        {% else %}
+            <div class="posttitle">
+                <h1>{{ post.pt_title }}</h1>
+            </div>
+            <hr>
+            {{ post.pt_md_text | safe }}
+        {% endif %}
     </div>
 {% endblock %}
