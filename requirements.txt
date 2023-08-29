@@ -3,4 +3,4 @@ googletrans==3.0.0
 Markdown==3.2.2
 pymongo==3.10.1
 python-dotenv==0.13.0
-uWSGI==2.0.19
+uWSGI==2.0.22
